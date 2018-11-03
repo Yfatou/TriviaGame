@@ -42,25 +42,28 @@ var questionArray = [
 
 //console.log(questionArray[0].question, questionArray[0].answers);
 
-
+//This function will get the question in the array and display it in the right div
+//then it take the choice of answers for that question and display them in the div
 function getQuestion() {
-    $("#timer").html(count + " secs");
+    $("#timer").html("Time Remaining: " + count + " secs");
     $("#questions-zone").html(questionArray[current].question);
     var answersArr = questionArray[current].answers;
     console.log(answersArr);
     var buttonsArr = [];
 
+    //For loop that goes trough the answer array and display the different choices
     $.each(answersArr, function(index){ 
-        console.log("in the for loop");
-        //var button = $("<button>");
-        $("#answer-zone").append("<button>"+ answersArr[index] + "</button>");
-        index++;
-        //button.text(answersArr[index]);
-        //button.attr("data-id", index);
-        //$("answer-zone").append(button);
+        //$("#answer-zone").append("<button>"+ answersArr[index] + "</button>");
+        //index++;
+        var a = $("<button>");
+          a.addClass("answer");
+          a.attr("data-name", answersArr[index]);
+          a.text(answersArr[index]);
+          $("#answer-zone").append(a);
+          buttonsArr.push(answersArr[index]);
+          console.log(buttonsArr[index]);
+          index++;
     })
-
-
     window.triviaCounter = setInterval(timer, 1000);
 };
 
@@ -72,48 +75,33 @@ function timer() {
         });
 
     } else {
-        $("#timer").html(count + " secs");
+        $("#timer").html("Time Remaining: " + count + " secs");
     }
 };
 
 function nextQuestion() {
     current++;
+    $("#answer-zone").empty();
     clearInterval(window.triviaCounter);
     count = 30;
     $("#timer").html("");
     setTimeout(function() {
-        //reset();
         getQuestion();
     }, 1000)
 };
 
-// function reset() {
-//     $('div[id]').each(function(item) {
-//         $(this).html('');
-//     });
-//     $('.correct').html('Correct answers: ' + _t.answers.correct);
-//     $('.incorrect').html('Incorrect answers: ' + _t.answers.incorrect);
-// };
-
-// _t.answer = function(correct) {
-//     var string = correct ? 'correct' : 'incorrect';
-//     _t.answers[string]++;
-//     $('.' + string).html(string + ' answers: ' + _t.answers[string]);
-// };
-// return _t;
-// };
-
-var Trivia;
 
 $("#start").click(function() {
-    //$(this).hide();
-   // $("div").html("");
-    //Trivia = new $(window());
+    $(this).hide();
     getQuestion();
 });
 
-$("answer-zone").on('click', 'button', function(e) {
-    var userPick = $(this).data("id"),
+//$("#answer-zone").on("click", function() {
+$("button").click(function(){  
+    console.log("in button click function") ;
+    var userPick = $(this).val();
+    console.log(userPick);
+    //$(this).data("id"),
         index = questionArray[current].correctAnswer,
         correct = questionArray[current].answers[index];
 
@@ -124,15 +112,6 @@ $("answer-zone").on('click', 'button', function(e) {
     }
     nextQuestion();
 });
-
-
-// function initial(){
-//     $("#start").click(function(){
-//     clearInterval(setIntervalID);
-//     setIntervalID = setInterval(getQuestion,30000);
-//     })
-// }
-
 
 
 
