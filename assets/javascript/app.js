@@ -26,7 +26,7 @@ var questionArray = [ //Array of questions
     rightAnswer: "1979",
     image: "/TriviaGame/assets/images/ThatcherGif.webp"},
 
-    {question: "When did the Cold War ended?",
+    {question: "When did the Cold War end?",
     answers: ["1978", "1985", "1989", "1998"],
     rightAnswer: "1989",
     image: "/TriviaGame/assets/images/coldWarGif.webp"},
