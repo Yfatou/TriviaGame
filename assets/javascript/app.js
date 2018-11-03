@@ -41,6 +41,9 @@ var questionArray = [ //Array of questions
     rightAnswer: "Shiling",
     image: "/TriviaGame/assets/images/shiling.jpeg"}]
 
+function initial(){
+    getQuestion();
+}
 
 //to reset the divs before the next question
 function reset(){
@@ -76,7 +79,6 @@ function getQuestion() {
         $("#answer-zone").append("<br> Incorrects answers: " + uncorrectAnswer);
         $("#answer-zone").append("<br> Unanswered: " + (questionArray.length - (correctAnswer + uncorrectAnswer)));
         $("#startOver").text("Start Over?").appendTo("#answer-zone").show();
-        //$("#startOver").text("Start Over?").appendTo("#answer-zone").show();
     } 
 };
 
@@ -138,16 +140,16 @@ function displayResult() {
 $("#start").click(function() {
     $(this).hide();//hide the start button
     reset();
-    getQuestion();
+    initial();
+    //getQuestion();
 });
 
+//To restart the game when the user click on the button Start Over
 $("#startOver").on("click", function() {
-    console.log("in start over click");
     $(this).hide();//hide the start button
-    console.log("in start over call reset");
     reset();
-    console.log("in start over call getquestion");
-    getQuestion();
+    initial();
+    //getQuestion();
 });
 
 
@@ -167,10 +169,5 @@ $("#answer-zone").on("click", "button", function() {
     nextQuestion(); //display the next question
 });
 
-// $("#start").on("click",function(){
-//     console.log("on click start");
-//      reset();
-//      getQuestion();
-// });
 
 });
